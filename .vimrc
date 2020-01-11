@@ -108,7 +108,7 @@ set smartcase       "ignore case if all lowercase, o/w case-sensitive
 set showmatch
 
 " All shortcut mappings
-let mapleader = " "
+let mapleader = ","
 " Set leader timeout length
 set timeoutlen=2000
 
