@@ -1,8 +1,8 @@
 set nocompatible
 
 " GET PLUGINS FIRST
-execute pathogen#infect()
-syntax on
+"execute pathogen#infect()
+"syntax on
 
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -30,7 +30,7 @@ call plug#end()
 
 " clang_complete library path (TODO may need to modify depending on where clang lib is installed)
 "let g:clang_library_path='/usr/lib64/llvm/'
-"set cursorline
+set cursorline
 "set cursorcolumn
 "highlight Cursor ctermfg=White ctermbg=Yellow cterm=bold guifg=white guibg=yellow gui=bold
 "highlight CursorColumn ctermfg=White ctermbg=Yellow cterm=bold guifg=white guibg=yellow gui=bold
@@ -93,6 +93,7 @@ set undolevels=1000                     "store more undos"
 set wildignore=*.swp,*.bak,*.class      "ignores the following file extensions
 set visualbell                          "don't beep
 set noerrorbells                        "don't beep
+set belloff=all                        "don't beep
 "set nobackup                            "disable backups
 "set noswapfile                          "disable swp files
 "set backupdir=./.backup,.,/tmp/
