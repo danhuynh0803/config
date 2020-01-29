@@ -11,6 +11,8 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-rhubarb'
 Plug 'ludovicchabant/vim-lawrencium'
 Plug 'valloric/youcompleteme', { 'do': 'python3 ./install.py --clang-completer' }
 Plug 'tikhomirov/vim-glsl'
@@ -30,7 +32,8 @@ call plug#end()
 
 " clang_complete library path (TODO may need to modify depending on where clang lib is installed)
 "let g:clang_library_path='/usr/lib64/llvm/'
-"set cursorline
+set cursorline
+hi CursorLine cterm=NONE ctermbg=darkblue ctermfg=white guibg=darkblue ctermfg=white
 "set cursorcolumn
 "highlight Cursor ctermfg=White ctermbg=Yellow cterm=bold guifg=white guibg=yellow gui=bold
 "highlight CursorColumn ctermfg=White ctermbg=Yellow cterm=bold guifg=white guibg=yellow gui=bold
@@ -55,20 +58,21 @@ set hlsearch
 
 set mouse=a             "enable mouse in vim (useful for scrolling)
 " This function toggles mouse functionality from vim to terminal (not sure if really needed)
-fun! s:ToggleMouse()
-    if !exists("s:old_mouse")
-        let s:old_mouse = "a"
-    endif
 
-    if &mouse == ""
-        let &mouse = s:old_mouse
-        echo "Mouse is for Vim (" . &mouse . ")"
-    else
-        let s:old_mouse = &mouse
-        let &mouse=""
-        echo "Mouse is for terminal"
-    endif
-endfunction
+"fun! s:ToggleMouse()
+"    if !exists("s:old_mouse")
+"        let s:old_mouse = "a"
+"    endif
+"
+"    if &mouse == ""
+"        let &mouse = s:old_mouse
+"        echo "Mouse is for Vim (" . &mouse . ")"
+"    else
+"        let s:old_mouse = &mouse
+"        let &mouse=""
+"        echo "Mouse is for terminal"
+"    endif
+"endfunction
 
 set ruler
 set tabstop=4
@@ -150,16 +154,24 @@ cmap w!! w !sudo tee % >/dev/null
 " Cleare highlighted searches
 nmap <silent> ,/ :nohlsearch<CR>
 
-" fugitive mappings
-"nnoremap <leader>gs :Gstatus<CR>
-"nnoremap <leader>gd :Gdiffsplit<CR>
-"nnoremap <leader>gcl :Gclog<CR>
-"nnoremap <leader>gll :Gllog<CR>
+" fugitive git bindings
+nnoremap <leader>ga :Git add %:p<CR><CR>
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gc :Gcommit -v -q<CR>
+nnoremap <leader>gt :Gcommit -v -q %:p<CR>
+nnoremap <leader>gd :Gvdiffsplit<CR>
+nnoremap <leader>gl :silent! Glog<CR>:bot copen<CR>
+nnoremap <leader>gm :Gmove<Space>
+nnoremap <leader>gb :Git branch<Space>
+nnoremap <leader>go :Git checkout<Space>
+nnoremap <leader>gps :Dispatch! git push<CR>
+nnoremap <leader>gpl :Dispatch! git pull<CR>
+
 
 " lawrencium mappings
-nnoremap <leader>gs :Hgstatus<CR>
-nnoremap <leader>gd :Hgvdiff<CR>
-nnoremap <leader>gl :Hg log --limit 5 
+"nnoremap <leader>gs :Hgstatus<CR>
+"nnoremap <leader>gd :Hgvdiff<CR>
+"nnoremap <leader>gl :Hg log --limit 5 
 
 map <leader><space> :let @/=''<CR> " clear search
 
