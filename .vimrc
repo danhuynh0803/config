@@ -156,7 +156,7 @@ nmap <silent> ,/ :nohlsearch<CR>
 
 " fugitive git bindings
 nnoremap <leader>ga :Git add %:p<CR><CR>
-nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gs :15Gstatus<CR>
 nnoremap <leader>gc :Gcommit -v -q<CR>
 nnoremap <leader>gt :Gcommit -v -q %:p<CR>
 nnoremap <leader>gd :Gvdiffsplit<CR>
