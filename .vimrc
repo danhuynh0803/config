@@ -1,8 +1,8 @@
 set nocompatible
 
 " GET PLUGINS FIRST
-execute pathogen#infect()
-syntax on
+"execute pathogen#infect()
+"syntax on
 
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -35,7 +35,6 @@ call plug#end()
 set cursorline
 hi CursorLine cterm=NONE ctermbg=darkblue ctermfg=white guibg=darkblue ctermfg=white
 "set cursorcolumn
-"highlight Cursor ctermfg=White ctermbg=Yellow cterm=bold guifg=white guibg=yellow gui=bold
 "highlight CursorColumn ctermfg=White ctermbg=Yellow cterm=bold guifg=white guibg=yellow gui=bold
 "autocmd InsertLeave * set cursorline
 "autocmd InsertEnter * set nocursorline
@@ -97,6 +96,7 @@ set undolevels=1000                     "store more undos"
 set wildignore=*.swp,*.bak,*.class      "ignores the following file extensions
 set visualbell                          "don't beep
 set noerrorbells                        "don't beep
+"set belloff=all                        "don't beep (need for certain OS/distros
 "set nobackup                            "disable backups
 "set noswapfile                          "disable swp files
 "set backupdir=./.backup,.,/tmp/
@@ -160,7 +160,7 @@ nnoremap <leader>gs :15Gstatus<CR>
 nnoremap <leader>gc :Gcommit -v -q<CR>
 nnoremap <leader>gt :Gcommit -v -q %:p<CR>
 nnoremap <leader>gd :Gvdiffsplit<CR>
-nnoremap <leader>gl :silent! Glog<CR>:bot copen<CR>
+nnoremap <leader>gl :Glog --<CR>
 nnoremap <leader>gm :Gmove<Space>
 nnoremap <leader>gb :Git branch<Space>
 nnoremap <leader>go :Git checkout<Space>
