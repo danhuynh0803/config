@@ -154,13 +154,18 @@ cmap w!! w !sudo tee % >/dev/null
 " Cleare highlighted searches
 nmap <silent> ,/ :nohlsearch<CR>
 
+" vimdiff merge bindings
+nnoremap <leader>1 :diffget LOCAL<CR>
+nnoremap <leader>2 :diffget BASE<CR>
+nnoremap <leader>3 :diffget REMOTE<CR>
+
 " fugitive git bindings
 nnoremap <leader>ga :Git add %:p<CR><CR>
 nnoremap <leader>gs :15Gstatus<CR>
 nnoremap <leader>gc :Gcommit -v -q<CR>
 nnoremap <leader>gt :Gcommit -v -q %:p<CR>
 nnoremap <leader>gd :Gvdiffsplit<CR>
-nnoremap <leader>gl :Glog --<CR>
+nnoremap <leader>gl :Gclog --<CR>
 nnoremap <leader>gm :Gmove<Space>
 nnoremap <leader>gb :Git branch<Space>
 nnoremap <leader>go :Git checkout<Space>
@@ -215,6 +220,13 @@ let g:fzf_layout = { 'down': '~70%' }
 let g:fzf_layout = { 'window': 'enew' }
 let g:fzf_layout = { 'window': '-tabnew' }
 let g:fzf_layout = { 'window': '10new' }
+
+" resize vim split panes
+" resize current buffer by +/- 5 
+nnoremap <M-left>  :vertical resize -5<cr>
+nnoremap <M-down>  :resize +5<cr>
+nnoremap <M-up>    :resize -5<cr>
+nnoremap <M-right> :vertical resize +5<cr>
 
 " Popup windows
 "let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
