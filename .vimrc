@@ -181,12 +181,12 @@ nnoremap <leader>gpl :Dispatch! git pull<CR>
 map <leader><space> :let @/=''<CR> " clear search
 
 " let g:lmap.t  = { 'name' : '+tools' }
-nnoremap <leader>b :buffers<CR>
+nnoremap <C-up> :buffers<CR>
 " Quickly swap buffers with arrow keys
 nnoremap <C-right> :bn<CR>
 nnoremap <C-left> :bp<CR>
-" Delete buffers (TODO find a better mapping since it's easy to misclick)
-"nnoremap <C-down> :bd<CR>
+" Delete buffers
+nnoremap <C-down><C-down> :bd<CR>
 
 " FZF / FZG remapping
 nnoremap <C-p> :FZF<CR>
@@ -258,6 +258,12 @@ let g:fzf_colors =
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 
 filetype plugin off
+
+"vimdiff settings
+highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
 
 " Syntastic recommended settings
 "set statusline+=%#warningmsg#
