@@ -20,6 +20,7 @@ Plug 'yggdroot/indentline'
 Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/nerdtree'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'rizzatti/dash.vim'
 "Plug 'scrooloose/syntastic'
 call plug#end()
 
@@ -132,7 +133,8 @@ vmap Q gq
 nmap Q gqap
 
 " Quickly edit/source vimrc
-nmap <silent> <leader>ev :e $MYVIMRC<CR>
+"nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>ev :vs ~/.vimrc<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
 " Treat wrapped lines as multiples lines so we can jump to it
@@ -171,7 +173,6 @@ nnoremap <leader>gb :Git branch<Space>
 nnoremap <leader>go :Git checkout<Space>
 nnoremap <leader>gps :Dispatch! git push<CR>
 nnoremap <leader>gpl :Dispatch! git pull<CR>
-
 
 " lawrencium mappings
 "nnoremap <leader>gs :Hgstatus<CR>
@@ -259,11 +260,18 @@ let g:fzf_history_dir = '~/.local/share/fzf-history'
 
 filetype plugin off
 
+" Color scheme (terminal)
+set t_Co=256
+set background=dark
+let g:solarized_termcolors=256
+let g:solarized_termtrans=1
+colorscheme solarized
+
 "vimdiff settings
-highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Green
 highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
-highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
-highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
+highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Blue
+highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Yellow
 
 " Syntastic recommended settings
 "set statusline+=%#warningmsg#
@@ -274,9 +282,4 @@ highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Re
 "let g:syntastic_check_on_open = 1
 "let g:syntastic_check_on_wq = 0
 
-" Color scheme (terminal)
-set t_Co=256
-set background=dark
-let g:solarized_termcolors=256
-let g:solarized_termtrans=1
-colorscheme solarized
+
