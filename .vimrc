@@ -174,6 +174,11 @@ nnoremap <leader>go :Git checkout<Space>
 nnoremap <leader>gps :Dispatch! git push<CR>
 nnoremap <leader>gpl :Dispatch! git pull<CR>
 
+" PSIM specific dispatch commands
+nnoremap <leader>make :Dispatch! remake<CR>
+nnoremap <leader>kill :Dispatch! killsub<CR>
+nnoremap <leader>sub :Dispatch! subview SIMMODE<CR>
+
 " lawrencium mappings
 "nnoremap <leader>gs :Hgstatus<CR>
 "nnoremap <leader>gd :Hgvdiff<CR>
@@ -268,10 +273,10 @@ let g:solarized_termtrans=1
 colorscheme solarized
 
 "vimdiff settings
-highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Green
-highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
-highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Blue
-highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Yellow
+hi DiffAdd      cterm=none ctermfg=14 ctermbg=22 gui=none
+hi DiffChange   cterm=none ctermfg=10 ctermbg=21 gui=none
+hi DiffDelete   cterm=none ctermfg=10 ctermbg=1
+hi DiffText     cterm=none ctermfg=10
 
 " Syntastic recommended settings
 "set statusline+=%#warningmsg#
