@@ -4,6 +4,14 @@ set nocompatible
 "execute pathogen#infect()
 "syntax on
 
+" Color scheme (terminal)
+"set t_Co=256
+set background=dark
+"let g:solarized_termcolors=256
+"let g:solarized_termtrans=1
+colorscheme apprentice
+
+
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -14,7 +22,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-rhubarb'
 Plug 'ludovicchabant/vim-lawrencium'
-Plug 'valloric/youcompleteme', { 'do': 'python3 ./install.py --clang-completer' }
+"Plug 'valloric/youcompleteme', { 'do': 'python3 ./install.py --clang-completer' }
 Plug 'tikhomirov/vim-glsl'
 Plug 'yggdroot/indentline'
 Plug 'vim-airline/vim-airline'
@@ -34,7 +42,7 @@ call plug#end()
 " clang_complete library path (TODO may need to modify depending on where clang lib is installed)
 "let g:clang_library_path='/usr/lib64/llvm/'
 set cursorline
-hi CursorLine cterm=NONE ctermbg=darkblue ctermfg=white guibg=darkblue ctermfg=white
+"hi CursorLine cterm=NONE ctermbg=darkblue ctermfg=white guibg=darkblue ctermfg=white
 "set cursorcolumn
 "highlight CursorColumn ctermfg=White ctermbg=Yellow cterm=bold guifg=white guibg=yellow gui=bold
 "autocmd InsertLeave * set cursorline
@@ -265,18 +273,11 @@ let g:fzf_history_dir = '~/.local/share/fzf-history'
 
 filetype plugin off
 
-" Color scheme (terminal)
-set t_Co=256
-set background=dark
-let g:solarized_termcolors=256
-let g:solarized_termtrans=1
-colorscheme solarized
-
 "vimdiff settings
-hi DiffAdd      cterm=none ctermfg=14 ctermbg=22 gui=none
-hi DiffChange   cterm=none ctermfg=10 ctermbg=21 gui=none
-hi DiffDelete   cterm=none ctermfg=10 ctermbg=1
-hi DiffText     cterm=none ctermfg=10
+"hi DiffAdd      cterm=none ctermfg=14 ctermbg=71 gui=none
+"hi DiffChange   cterm=none ctermfg=10 ctermbg=74 gui=none
+"hi DiffDelete   cterm=none ctermfg=10 ctermbg=203
+"hi DiffText     cterm=none ctermfg=10
 
 " Syntastic recommended settings
 "set statusline+=%#warningmsg#
