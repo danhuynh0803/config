@@ -1,5 +1,10 @@
 set nocompatible
 
+" All shortcut mappings
+let mapleader = ","
+" Set leader timeout length
+set timeoutlen=500
+
 " GET PLUGINS FIRST
 "execute pathogen#infect()
 "syntax on
@@ -29,6 +34,9 @@ Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/nerdtree'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'rizzatti/dash.vim'
+"Plug 'preservim/tagbar'
+"nnoremap <leader>p :TagbarToggle<CR>
+
 "Plug 'scrooloose/syntastic'
 call plug#end()
 
@@ -93,7 +101,8 @@ set wrap linebreak nolist
 set expandtab
 set list
 set listchars=tab:>-,trail:~,extends:>,precedes:<
-set tags=./tags,tags;
+"set tags=./tags,tags;
+set tags=~/repos/svk/drivers/tags
 set nu
 set rnu
 set rtp+=~/.fzf
@@ -120,16 +129,11 @@ set pastetoggle=<F2>                    "prevent auto-identing and auto-expansio
 " Searching
 nnoremap / /\v\c
 vnoremap / /\v\c
-set hlsearch        "highlights search matches
-set incsearch       "show search matches as you type
 "set ignorecase      "ignores case
 set smartcase       "ignore case if all lowercase, o/w case-sensitive
+set hlsearch        "highlights search matches
+set incsearch       "show search matches as you type
 set showmatch
-
-" All shortcut mappings
-let mapleader = ","
-" Set leader timeout length
-set timeoutlen=2000
 
 " NERDtree shortcut
 map <C-n> :NERDTreeToggle<CR>
@@ -157,6 +161,15 @@ map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
+" Tab navigation
+nnoremap th  :tabfirst<CR>
+nnoremap tk  :tabnext<CR>
+nnoremap tj  :tabprev<CR>
+nnoremap tl  :tablast<CR>
+nnoremap tt  :tabedit<Space>
+nnoremap tn  :tabnext<Space>
+nnoremap tm  :tabm<Space>
+nnoremap td  :tabclose<CR>
 
 " Use w!! to sudo edit a file even after we opened it
 cmap w!! w !sudo tee % >/dev/null
@@ -170,22 +183,11 @@ nnoremap <leader>2 :diffget BASE<CR>
 nnoremap <leader>3 :diffget REMOTE<CR>
 
 " fugitive git bindings
-nnoremap <leader>ga :Git add %:p<CR><CR>
-nnoremap <leader>gs :15Gstatus<CR>
-nnoremap <leader>gc :Gcommit -v -q<CR>
-nnoremap <leader>gt :Gcommit -v -q %:p<CR>
-nnoremap <leader>gd :Gvdiffsplit<CR>
-nnoremap <leader>gl :Gclog --<CR>
-nnoremap <leader>gm :Gmove<Space>
-nnoremap <leader>gb :Git branch<Space>
-nnoremap <leader>go :Git checkout<Space>
-nnoremap <leader>gps :Dispatch! git push<CR>
-nnoremap <leader>gpl :Dispatch! git pull<CR>
+nnoremap <leader>g :Git<CR>
 
-" PSIM specific dispatch commands
-nnoremap <leader>make :Dispatch! remake<CR>
-nnoremap <leader>kill :Dispatch! killsub<CR>
-nnoremap <leader>sub :Dispatch! subview SIMMODE<CR>
+
+" build specific dispatch commands
+nnoremap <leader>make :Dispatch! ~/repos/svk/remake<CR>
 
 " lawrencium mappings
 "nnoremap <leader>gs :Hgstatus<CR>
@@ -206,7 +208,8 @@ nnoremap <C-down><C-down> :bd<CR>
 nnoremap <C-p> :FZF<CR>
 nnoremap <leader>r :FZG<CR>
 " Pass rg to fzf
-command! -bang -nargs=* FZG call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!tags" --glob "!.git/*" --glob "!.hg/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+" command! -bang -nargs=* FZG call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!tags" --glob "!.git/*" --glob "!.hg/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+command! -bang -nargs=* FZG call fzf#vim#grep('rg --column --no-heading --smart-case --color=always '.shellescape(<q-args>), 1, <bang>0)
 " This is the default extra key bindings
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
@@ -228,19 +231,19 @@ let g:fzf_action = {
 
 " Default fzf layout
 " - down / up / left / right
-let g:fzf_layout = { 'down': '~70%' }
+let g:fzf_layout = { 'down': '~50%' }
 
 " You can set up fzf window using a Vim command (Neovim or latest Vim 8 required)
 let g:fzf_layout = { 'window': 'enew' }
 let g:fzf_layout = { 'window': '-tabnew' }
-let g:fzf_layout = { 'window': '10new' }
+let g:fzf_layout = { 'window': '20new' }
 
 " resize vim split panes
 " resize current buffer by +/- 5 
-nnoremap <M-left>  :vertical resize -5<cr>
-nnoremap <M-down>  :resize +5<cr>
-nnoremap <M-up>    :resize -5<cr>
-nnoremap <M-right> :vertical resize +5<cr>
+nnoremap <M-h>  :vertical resize -5<CR>
+nnoremap <M-j>  :resize +5<CR>
+nnoremap <M-k>  :resize -5<CR>
+nnoremap <M-l>  :vertical resize +5<CR>
 
 " Popup windows
 "let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
@@ -288,4 +291,86 @@ filetype plugin off
 "let g:syntastic_check_on_open = 1
 "let g:syntastic_check_on_wq = 0
 
+"fzf tags
+function! s:tags_sink(line)
+  let parts = split(a:line, '\t\zs')
+  let excmd = matchstr(parts[2:], '^.*\ze;"\t')
+  execute 'silent e' parts[1][:-2]
+  let [magic, &magic] = [&magic, 0]
+  execute excmd
+  let &magic = magic
+endfunction
 
+function! s:tags()
+  if empty(tagfiles())
+    echohl WarningMsg
+    echom 'Preparing tags'
+    echohl None
+    call system('ctags -R')
+  endif
+
+  call fzf#run({
+  \ 'source':  'cat '.join(map(tagfiles(), 'fnamemodify(v:val, ":S")')).
+  \            '| grep -v -a ^!',
+  \ 'options': '+m -d "\t" --with-nth 1,4.. -n 1 --tiebreak=index',
+  \ 'down':    '40%',
+  \ 'sink':    function('s:tags_sink')})
+endfunction
+
+command! Tags call s:tags()
+nnoremap <leader>t :Tags<CR>
+
+"Buffer tags"
+function! s:align_lists(lists)
+  let maxes = {}
+  for list in a:lists
+    let i = 0
+    while i < len(list)
+      let maxes[i] = max([get(maxes, i, 0), len(list[i])])
+      let i += 1
+    endwhile
+  endfor
+  for list in a:lists
+    call map(list, "printf('%-'.maxes[v:key].'s', v:val)")
+  endfor
+  return a:lists
+endfunction
+
+function! s:btags_source()
+  let lines = map(split(system(printf(
+    \ 'ctags -f - --sort=no --excmd=number --language-force=%s %s',
+    \ &filetype, expand('%:S'))), "\n"), 'split(v:val, "\t")')
+  if v:shell_error
+    throw 'failed to extract tags'
+  endif
+  return map(s:align_lists(lines), 'join(v:val, "\t")')
+endfunction
+
+function! s:btags_sink(line)
+  execute split(a:line, "\t")[2]
+endfunction
+
+function! s:btags()
+  try
+    call fzf#run({
+    \ 'source':  s:btags_source(),
+    \ 'options': '+m -d "\t" --with-nth 1,4.. -n 1 --tiebreak=index',
+    \ 'down':    '40%',
+    \ 'sink':    function('s:btags_sink')})
+  catch
+    echohl WarningMsg
+    echom v:exception
+    echohl None
+  endtry
+endfunction
+
+command! BTags call s:btags()
+nnoremap <leader>b :BTags<CR>
+
+" Open horizontal split
+nnoremap <silent> <Leader>x :split<CR>
+
+" Open vertical split
+nnoremap <silent> <Leader>v :vsplit<CR>
+
+let g:fzf_tags_command = 'ctags -R ~/repos/svk/drivers'
